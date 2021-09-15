@@ -20,6 +20,7 @@ export class AcceuilComponent implements OnInit {
   confirm: boolean | undefined;
   EmailExist: boolean | undefined;
   submitted: boolean | undefined;
+  loginFailled: boolean = false;
 
   constructor(private _auth : AuthService,private _router : Router,private formBuilder: FormBuilder,private authService : SocialAuthService) { }
 
@@ -57,7 +58,9 @@ export class AcceuilComponent implements OnInit {
                 }
         },
         err=>{
-          console.log(err);
+          // console.log(err);
+          this.loginFailled = true;
+          console.log(this.loginFailled);
           // this.message = err?.message;
         }) 
        
@@ -82,7 +85,7 @@ export class AcceuilComponent implements OnInit {
         $('#elegantModalFormSuccess').modal('show');
         setTimeout(() => {
           $('#elegantModalFormSuccess').modal('hide');
-            this._router.navigate(['/acceuil'])
+            location.reload();
         }, 6000);
       },
       err=> {
@@ -134,8 +137,8 @@ get f2() { return this.loginForm.controls; }
       });
       this.loginForm = this.formBuilder.group({
 
-        email: ['', [Validators.required,]],
-        password: ['', [Validators.required,]],
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]],
         });
   }
 

@@ -53,7 +53,7 @@ public titleCase = "abdo"
       
       res=>{
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        window.location.href = "http://localhost:4200/specialiste/home";
+        location.reload();
       },err=>{console.log(err)}
       );
     
@@ -122,7 +122,7 @@ public titleCase = "abdo"
         $('#elegantModalFormUpdate').modal('hide');
         setTimeout(()=>{
           $('#myModal').modal('hide');
-          window.location.href = "http://localhost:4200/specialiste/home";
+          location.reload();
         },1000)
       },
       err=> console.log(err)

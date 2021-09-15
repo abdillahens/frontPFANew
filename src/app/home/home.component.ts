@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       res=>{
 
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        this._router.navigate(['/home'])
+        location.reload();
       },err=>{console.log(err)}
       );
     
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
           $('#elegantModalFormUpdate').modal('hide');
           setTimeout(()=>{
             $('#myModal').modal('hide');
-           this._router.navigate(['/home'])
+            location.reload();
           },1000)
         },
         err=> console.log(err)

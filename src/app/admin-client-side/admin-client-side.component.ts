@@ -35,7 +35,6 @@ export class AdminClientSideComponent implements OnInit {
 
     this._Client.deleteClient(id).subscribe(
       res=> {
-        console.log(res);
         this.ngOnInit();
       },
       err=>{console.log(err)})
@@ -70,17 +69,17 @@ export class AdminClientSideComponent implements OnInit {
     if (this.updateForm.invalid) {
         return;
     }
-    console.log(id);
+
 
     this._Client.updateClient(id,nom,prenom,sexe,date_naissance,email,tele,profession,adresse,niveauScolaire,password).subscribe(
       res =>{
-        console.log(res.message);
         this.message = res.message;
         $('#myModal').modal('show');
         $('#elegantModalFormUpdate').modal('hide');
         setTimeout(()=>{
           $('#myModal').modal('hide');
-          window.location.href = "http://localhost:4200/admin/client-side";
+          // this._router.navigate(['/admin/client-side'])
+          location.reload();
         },1000)
       },
       err=> console.log(err) 
@@ -98,7 +97,6 @@ export class AdminClientSideComponent implements OnInit {
     return AdminClientSideComponent.clients
   }
   public changeTele(){
-    console.log("hi focus")
     if(this.TELE.length===0)this.TELE = '()-';
   }
 
@@ -119,13 +117,13 @@ export class AdminClientSideComponent implements OnInit {
     this._auth.registreClient(nom,prenom,sexe,date_naissance,email,tele,profession,niveauScolaire,password).subscribe(
 
       res =>{
-        console.log(res.message);
         this.message = res.message;
         $('#elegantModalFormRegistre').modal('hide');
         $('#elegantModalFormSuccess').modal('show');
         setTimeout(() => {
           $('#elegantModalFormSuccess').modal('hide');
-          window.location.href = "http://localhost:4200/admin/client-side";
+          // this._router.navigate(['/admin/client-side'])
+          location.reload();
         }, 6000);
       },
       err=> {
@@ -145,7 +143,6 @@ export class AdminClientSideComponent implements OnInit {
    this._Client.getClients().subscribe(
       res=> {
         AdminClientSideComponent.clients = res;
-        console.log(AdminClientSideComponent.clients);
       },
       err=>{console.log(err)})
       this._auth.getInformation().subscribe(

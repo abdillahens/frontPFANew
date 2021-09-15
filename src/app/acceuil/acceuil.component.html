@@ -55,7 +55,7 @@
                     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
                         <div class="md-form mb-4 form-group">
                             <input type="email" id="Form-email1" formControlName="email"
-                                class="form-control validate validate" placeholder="Votre email">
+                                class="form-control validate validate" [ngClass]="{ 'is-invalid': submitted && f2.email.errors }" placeholder="Votre email">
                             <div *ngIf="submitted && f2.email.errors" class="invalid-feedback">
                                 <div *ngIf="f2.email.errors.required">Email est obligatoire</div>
                                 <div *ngIf="f2.email.errors.email">Email must be a valid email address</div>
@@ -63,11 +63,15 @@
                         </div>
 
                         <div class="md-form pb-3 form-group">
-                            <input type="password" id="Form-pass1" formControlName="password"
+                            <input type="password" id="Form-pass1" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f2.password.errors }"
                                 class="form-control validate validate" placeholder="Votre mot de pass">
                             <div *ngIf="submitted && f2.password.errors" class="invalid-feedback">
                                 <div *ngIf="f2.password.errors.required">Password est obligatoire</div>
                             </div>
+                            <h6 *ngIf="loginFailled">
+                                <br>
+                                <div class="text-danger">Email ou Le mot de pass est incorrect</div>
+                            </h6>
                             <p class="font-small blue-text d-flex justify-content-end mt-2"> <a href="#"
                                     class="blue-text mr-1">
                                     Mot de pass </a> Oublié?</p>

@@ -120,8 +120,8 @@ export class AdminSpecialisteSideComponent implements OnInit {
         $('#elegantModalFormUpdate').modal('hide');
         setTimeout(()=>{
           $('#myModal').modal('hide');
-          window.location.href = "http://localhost:4200/admin/specialiste-side";
-        },5000)
+          location.reload();
+        },1000)
       },
       err=> console.log(err)
     )
@@ -167,13 +167,12 @@ export class AdminSpecialisteSideComponent implements OnInit {
             },
             err => console.log(err)
           )
-        console.log(res.message);
         this.message = res.message;
         $('#myModal').modal('show');
         $('#elegantModalFormRegistre').modal('show');
         setTimeout(()=>{
           $('#myModal').modal('hide');
-          window.location.href = "http://localhost:4200/admin/specialiste-side";
+          location.reload();
         },5000)
       },
       err => console.log(err)
@@ -186,14 +185,12 @@ export class AdminSpecialisteSideComponent implements OnInit {
 
    this._Specialiste.getSpecialistes().subscribe(
       res=> {
-        console.log(res);
 
         AdminSpecialisteSideComponent.specialistes = res;
       },
       err=>{console.log(err)})
       this._auth.getInformation().subscribe(
         res => {
-          console.log(res);
           this.user = res;
         },
         err => {
