@@ -28,6 +28,7 @@ export class AdminClientSideComponent implements OnInit {
   addForm: any;
   EmailExist: boolean | undefined;
   public TELE: String="";
+  private deleteConfirm=false;
   constructor(private _Client : GestionClientService,private _auth : AuthService,private _router : Router,private formBuilder: FormBuilder,private http: HttpClient) { }
 
   public deleteClient(id:number){
@@ -38,6 +39,9 @@ export class AdminClientSideComponent implements OnInit {
         this.ngOnInit();
       },
       err=>{console.log(err)})
+  }
+  public confirmDelete(){
+    
   }
 
   public updateClient(id:number){

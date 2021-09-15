@@ -40,19 +40,15 @@ export class HomeComponent implements OnInit {
     }
     this.image = input.files[0];
     this.charged = false;
-    console.log(this.image);
   }
   
   public changePhoto(){
-
-    console.log("click")
     const formDataProfile = new FormData();
     formDataProfile.append('file', this.image);
     this._auth.uploadProfile(this.user.id,formDataProfile).subscribe(
       
       res=>{
-        // console.log("hhhhhhh")
-        console.log(res.src);
+
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
         window.location.href = "http://localhost:4200/home";
       },err=>{console.log(err)}
@@ -81,21 +77,19 @@ export class HomeComponent implements OnInit {
       // console.log(this.nom,this.prenom,this.sexe,this.date_naissance,this.email,this.tele,this.profession,this.password)
       this.submitted = true;
   
-      const {nom,prenom,sexe,date_naissance,email,tele,profession,adresse} = this.registerForm.value;
+      const {nom,prenom,sexe,date_naissance,email,tele,niveauScolaire,profession,adresse} = this.registerForm.value;
       if (this.registerForm.invalid) {
           return;
       }
-
   
-      this._gestionClient.updateClient2(this.user.id,nom,prenom,sexe,date_naissance,email,tele,profession,adresse).subscribe(
+      this._gestionClient.updateClient2(this.user.id,nom,prenom,sexe,date_naissance,email,tele,profession,niveauScolaire,adresse).subscribe(
         res =>{
-          console.log(res.message);
           $('#myModal').modal('show');
           $('#elegantModalFormUpdate').modal('hide');
           setTimeout(()=>{
             $('#myModal').modal('hide');
             window.location.href = "http://localhost:4200/home";
-          },5000)
+          },1000)
         },
         err=> console.log(err)
       )
@@ -106,10 +100,8 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
       this._auth.getInformation().subscribe(
         res => {
-          console.log(res);
           this.user = res;
-
-            console.log(this.registerForm.value)
+          console.log(this.registerForm.value)
         },
         err => {
           if(err instanceof HttpErrorResponse){

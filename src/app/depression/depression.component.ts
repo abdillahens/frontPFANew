@@ -28,6 +28,7 @@ export class DepressionComponent implements OnInit {
   clt= this.clientsValue();
   test: any;
   form: FormGroup = new FormGroup({});
+  message: any;
   constructor(private _auth : AuthService,private _Client : GestionClientService,private _router : Router,private http: HttpClient ,private formBuilder: FormBuilder,private _test : GestionTestService) {}
  
   private image: File = new File(["foo"], "foo.txt");
@@ -40,21 +41,17 @@ export class DepressionComponent implements OnInit {
     }
     this.image = input.files[0];
     this.charged = false;
-    console.log(this.image);
   }
   
   public changePhoto(){
 
-    console.log("click")
     const formDataProfile = new FormData();
     formDataProfile.append('file', this.image);
     this._auth.uploadProfile(this.user.id,formDataProfile).subscribe(
       
       res=>{
-        // console.log("hhhhhhh")
-        console.log(res.src);
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        window.location.href = "http://localhost:4200/home";
+       this._router.navigate(['/home']);
       },err=>{console.log(err)}
       );
     
@@ -85,10 +82,16 @@ export class DepressionComponent implements OnInit {
       {"id" : 24, "user_answer" : {"id" : this.form.value.Q24}},
 
     ]};
-    console.log(this.form.value.Q1)
 
     this._test.setResponse(response).subscribe(
-      res=>console.log(res),
+      res=>{
+        this.message = res.message;
+        $('#myModal').modal('show');
+        setTimeout(() => {
+          $('#myModal').modal('hide');
+          this._router.navigate(['/home']);
+        }, 5000);
+      },
       err=>console.log(err)
     );
 
@@ -108,20 +111,16 @@ export class DepressionComponent implements OnInit {
 
       this._auth.getInformation().subscribe(
         res => {
-          console.log(res);
           this.user = res;
         },
         err => {
           if(err instanceof HttpErrorResponse){
              console.log(err)
           }});
-
-
           (await this._test.getTest(3)).subscribe(
     res=>{
       this.test = res.question;
-      this.uploading = false;
-      console.log(res)},
+      this.uploading = false;},
     err=>{
       setTimeout(() => {
         this.refresh =true;

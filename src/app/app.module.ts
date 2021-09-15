@@ -88,11 +88,13 @@ import { EditPhotoProfileComponent } from './edit-photo-profile/edit-photo-profi
     ToastrModule.forRoot()
 
   ],
-  providers: [AuthService,SocialAuthService,AuthGuard,{
-    provide : HTTP_INTERCEPTORS,
-    useClass : TokenInterceptorService,
-    multi : true
-  },{
+  providers: [AuthService,SocialAuthService,AuthGuard
+    ,{
+      provide : HTTP_INTERCEPTORS,
+      useClass : TokenInterceptorService,
+      multi : true
+    }
+    ,{
     provide : 'SocialAuthServiceConfig',
     useValue : {
       autoLogin : false,

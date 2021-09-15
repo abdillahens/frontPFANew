@@ -24,8 +24,8 @@ export class GestionClientService {
   public deleteClient(id : number){
     return this.http.post<any>(this._deleteClientUrl,{id});
   }
-  public updateClient2(id : number, nom : String,prenom :String,sexe : String,date_naissance : Date,email : String,tele : String,profession : String,adresse: String){
-    return this.http.post<any>(this._updateClientUrl,{id,nom,prenom,sexe,date_naissance,email,tele,profession,adresse});
+  public updateClient2(id : number, nom : String,prenom :String,sexe : String,date_naissance : Date,email : String,tele : String,profession : String,niveauScolaire:String,adresse: String){
+    return this.http.post<any>(this._updateClientUrl,{id,nom,prenom,sexe,date_naissance,email,tele,niveauScolaire,profession,adresse});
   }
 
   public updateClient(id : number, nom : String,prenom :String,sexe : String,date_naissance : Date,email : String,tele : String,profession : String, adresse:String,niveauScolaire:String,password : String){

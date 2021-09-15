@@ -90,13 +90,13 @@ export class EditProfileComponent implements OnInit {
     // console.log(this.nom,this.prenom,this.sexe,this.date_naissance,this.email,this.tele,this.profession,this.password)
     this.submitted = true;
 
-    const {nom,prenom,sexe,date_naissance,email,tele,profession,adresse,password} = this.registerForm.value;
+    const {nom,prenom,sexe,date_naissance,email,tele,profession,niveauScolaire,adresse,password} = this.registerForm.value;
     if (this.registerForm.invalid) {
         return;
     }
     // console.log(this.registerForm.value);
 
-    this._gestionClient.updateClient2(this.id,nom,prenom,sexe,date_naissance,email,tele,profession,adresse).subscribe(
+    this._gestionClient.updateClient2(this.id,nom,prenom,sexe,date_naissance,email,tele,niveauScolaire,profession,adresse).subscribe(
       res =>{
         console.log(res.message);
         // this.message = res.message;

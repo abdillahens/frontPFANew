@@ -14,6 +14,7 @@ export class TokenInterceptorService implements HttpInterceptor{
     let tokenReq = req.clone({
       setHeaders:{
         authorization : `Bearer ${this._auth.loggedToken()}`,
+        'x-access-token':`${this._auth.loggedToken()}`
       }
     })
     return next.handle(tokenReq);

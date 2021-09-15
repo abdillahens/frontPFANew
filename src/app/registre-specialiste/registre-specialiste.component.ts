@@ -102,7 +102,7 @@ export class RegistreSpecialisteComponent implements OnInit {
       err => console.log(err)
     )
     $('#exampleModalCenter').on('hidden.bs.modal',  () => {
-      window.location.href = "http://localhost:4200/acceuil";
+      this._router.navigate(['/acceuil'])
      });
   }
 
@@ -111,36 +111,12 @@ export class RegistreSpecialisteComponent implements OnInit {
     return this.registerForm.controls; }
 
   ngOnInit(): void {
-    (window as any).fbAsyncInit = function() {
-
-      this.FB.init({
-        appId      : '528161951773275',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v11.0'
-      });
-        
-      FB.AppEvents.logPageView();   
-        
-    };
-    
-    (function(d, s, id){
-       var js,
-      fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = (<HTMLImageElement>d.createElement(s)); 
-       js.id = id;
-       js.src = "https://connect.facebook.net/en_US/all.js";
-    if(fjs.parentNode)
-       fjs.parentNode.insertBefore(js, fjs);
-     }
-     (document, 'script', 'facebook-jssdk'));
 
     this.registerForm = this.formBuilder.group({
       nom: ['', Validators.required], 
       prenom: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      tele: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      tele: ['', [Validators.required,Validators.pattern("^((\\([0-9][0-9][0-9]\\))|(\\([0-9][0-9]\\)))?\\-[0-9]{10}$")]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
       sexe: ['', [Validators.required]],

@@ -38,10 +38,10 @@ export class AcceuilComponent implements OnInit {
     console.log("salam");
     this.submitted = true;
     const {email,password} = this.loginForm.value;
-  
-    console.log(email,password)
+    
     if (this.loginForm.invalid) {
       console.log(this.f2.email.errors)
+      console.log(email,password)
           return;
       }
   
@@ -49,6 +49,7 @@ export class AcceuilComponent implements OnInit {
     this._auth.loginUser(email,password).subscribe(
         res=> {
           localStorage.removeItem('authorization');
+          console.log("logiin suceess");
           localStorage.setItem('authorization', res.accessToken);
           this.confirm = true;
           $('#elegantModalForm').modal('hide');
@@ -59,8 +60,8 @@ export class AcceuilComponent implements OnInit {
                 }
         },
         err=>{
-          console.log(err.error);
-          this.message = err.error.message;
+          console.log(err);
+          // this.message = err?.message;
         }) 
        
   }

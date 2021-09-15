@@ -15,7 +15,6 @@ export class AuthClientGuardGuard implements CanActivate {
 
     return new Promise(async (resolve,reject)=>{
 
-
       if(!(!!localStorage.getItem('authorization'))){
         resolve(false)
       }

@@ -29,7 +29,7 @@
         <div class="modal-dialog modal-dialog-centered mt-3 mb-0" role="document">
             <div class="modal-content">
                 <!-- <div class="modal-header text-white">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div> -->
@@ -196,7 +196,7 @@
                     <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3 ms-5" id="myModalLabel">
                         <strong>Modifier Votre Profile</strong>
                     </h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -300,8 +300,8 @@
                                     <option value="3 ème année cycle d'ingénieur">3 ème année cycle d'ingénieur
                                     </option>
                                 </select>
-                                    <div *ngIf="submitted && f?.profession.errors" class="invalid-feedback">
-                                        <div *ngIf="f?.profession.errors.required">profession est obligatoire</div>
+                                    <div *ngIf="submitted && f?.niveauScolaire.errors" class="invalid-feedback">
+                                        <div *ngIf="f?.niveauScolaire.errors.required">niveauScolaire est obligatoire</div>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +332,7 @@
                     <div class="icon-box">
                         <i class="far fa-check-circle"></i>
                     </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body text-center">
                     <h4>Parfait!</h4>	
