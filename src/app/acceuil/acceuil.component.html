@@ -336,6 +336,7 @@
                                         <div *ngIf="f.email.errors.required">Email est obligatoire</div>
                                         <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                                     </div>
+                                    <p *ngIf="EmailExist" class="text-danger pt-1 ps-2">Email déja exist !!</p>
                                 </div>
                             </div>
                             <div class="col-md-6">

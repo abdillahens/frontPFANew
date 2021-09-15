@@ -18,7 +18,7 @@ export class AcceuilComponent implements OnInit {
   public user !: SocialUser ;
   message: any;
   confirm: boolean | undefined;
-  EmailExist: boolean | undefined;
+  EmailExist: boolean =false;
   submitted: boolean | undefined;
   loginFailled: boolean = false;
 
@@ -92,7 +92,7 @@ export class AcceuilComponent implements OnInit {
         if(err.error.code === "ER_DUP_ENTRY"){
           this.EmailExist = true;
         }
-        console.log(err)
+  
       }
     )
 
