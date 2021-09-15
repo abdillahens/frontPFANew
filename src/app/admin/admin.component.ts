@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit {
         // console.log("hhhhhhh")
         console.log(res.src);
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        window.location.href = "http://localhost:4200/admin";
+        this._router.navigate(['/admin'])
       },err=>{console.log(err)}
       );
     

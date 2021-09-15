@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
         // console.log("hhhhhhh")
         console.log(res.src);
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        window.location.href = "http://localhost:4200/profile";
+        this._router.navigate(['/profile'])
       },err=>{console.log(err)}
       );
     
