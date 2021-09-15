@@ -8,8 +8,6 @@ export class TokenInterceptorService implements HttpInterceptor{
   constructor(private _auth : AuthService) { console.log('working');}
 
   intercept(req:any,next:any){
-
-    console.log('working');
     
     let tokenReq = req.clone({
       setHeaders:{

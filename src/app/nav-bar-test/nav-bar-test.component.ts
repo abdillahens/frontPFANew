@@ -16,8 +16,7 @@ export class NavBarTestComponent implements OnInit {
  private role : String="";
 
   constructor(private _router : Router,private _auth : AuthService) {
-    console.log(this.isLogged)
-    // this.ngOnInit();
+
   }
 
   public signUp(){
@@ -59,7 +58,6 @@ export class NavBarTestComponent implements OnInit {
 
     (await this._auth.getInformation()).subscribe(
       res => {
-        console.log(res.role)
         this.role = res.role;
       },
       err => {
@@ -69,7 +67,6 @@ export class NavBarTestComponent implements OnInit {
 
 
     this.isLogged =  !!localStorage.getItem('authorization');
-    console.log(this.isLogged)
     if(this.isLogged){
       this.home='/home';
     }

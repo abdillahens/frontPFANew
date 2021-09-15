@@ -17,7 +17,6 @@ export class AuthAdminGuardGuard implements CanActivate {
       (await this._auth.getInformation()).subscribe(
         res => {
           if(res.role ==='admin'){
-            console.log("aaa");
             resolve(true);
           }
         else resolve(false)},

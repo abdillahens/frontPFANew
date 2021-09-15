@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       res=>{
 
         (document.getElementById('myImage3') as HTMLFormElement).src = res.src;
-        window.location.href = "http://localhost:4200/home";
+        this._router.navigate(['/home'])
       },err=>{console.log(err)}
       );
     
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
           $('#elegantModalFormUpdate').modal('hide');
           setTimeout(()=>{
             $('#myModal').modal('hide');
-            window.location.href = "http://localhost:4200/home";
+           this._router.navigate(['/home'])
           },1000)
         },
         err=> console.log(err)
@@ -101,7 +101,6 @@ export class HomeComponent implements OnInit {
       this._auth.getInformation().subscribe(
         res => {
           this.user = res;
-          console.log(this.registerForm.value)
         },
         err => {
           if(err instanceof HttpErrorResponse){

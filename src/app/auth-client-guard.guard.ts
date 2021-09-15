@@ -40,9 +40,7 @@ export class AuthClientGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
       let a = await this.test();
-      console.log(a);
       let b = !! a;
-      console.log(b);
       return b;
   }
   

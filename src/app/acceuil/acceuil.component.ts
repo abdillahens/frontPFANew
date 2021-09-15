@@ -25,7 +25,7 @@ export class AcceuilComponent implements OnInit {
 
   //////////////// change tele
   public changeTele(){
-    console.log("hi focus")
+
     //if(this.TELE.length===2) this.TELE+='-';
     if(this.TELE.length===0)this.TELE = '()-';
   }
@@ -35,13 +35,11 @@ export class AcceuilComponent implements OnInit {
   }
   //////////////login
   public async loginSubmit(){
-    console.log("salam");
+
     this.submitted = true;
     const {email,password} = this.loginForm.value;
     
     if (this.loginForm.invalid) {
-      console.log(this.f2.email.errors)
-      console.log(email,password)
           return;
       }
   
@@ -49,7 +47,6 @@ export class AcceuilComponent implements OnInit {
     this._auth.loginUser(email,password).subscribe(
         res=> {
           localStorage.removeItem('authorization');
-          console.log("logiin suceess");
           localStorage.setItem('authorization', res.accessToken);
           this.confirm = true;
           $('#elegantModalForm').modal('hide');
@@ -71,8 +68,6 @@ export class AcceuilComponent implements OnInit {
 
     // console.log(this.nom,this.prenom,this.sexe,this.date_naissance,this.email,this.tele,this.profession,this.password)
     this.submitted = true;
-    console.log(this.registerForm.invalid);
-
     const {nom,prenom,sexe,date_naissance,email,tele,profession,niveauScloaire,password} = this.registerForm.value;
     if (this.registerForm.invalid) {
         return;
@@ -81,14 +76,13 @@ export class AcceuilComponent implements OnInit {
     this._auth.registreClient(nom,prenom,sexe,date_naissance,email,tele,profession,niveauScloaire,password).subscribe(
 
       res =>{
-        console.log(res.message);
         this.message = res.message;
         this.confirm = true;
         $('#elegantModalFormRegistre').modal('hide');
         $('#elegantModalFormSuccess').modal('show');
         setTimeout(() => {
           $('#elegantModalFormSuccess').modal('hide');
-            window.location.href = "http://localhost:4200/acceuil";
+            this._router.navigate(['/acceuil'])
         }, 6000);
       },
       err=> {
@@ -104,13 +98,10 @@ export class AcceuilComponent implements OnInit {
   async signInGoogle(){
     
     await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res=>this.user=res);
-     console.log(this.user)
      this._auth.loginUserGoogle(this.user.idToken).subscribe(
        res=> {
-        console.log("registre google account")
          localStorage.removeItem('authorization');
          localStorage.setItem('authorization', res.accessToken);
-         console.log("registre google account");
          $('#elegantModalFormRegistre').modal('hide');
          $('#elegantModalForm').modal('hide');
           this._router.navigate(['/home']);

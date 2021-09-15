@@ -18,7 +18,6 @@ export class AuthService {
   constructor(private http : HttpClient,private _router : Router) { }
 
   public loginUserGoogle( token : String){
-    console.log("token is "+token);
     return this.http.post<any>(this._loginUrlGoogle,{token : token});
   }
 
@@ -50,12 +49,12 @@ export class AuthService {
   }
 
   public uploadFileCV(id : number , myFile : FormData ){
-    console.log(id);
+
     return this.http.post<any>('http://localhost:5000/upload/cv',myFile,{params: {id:id}});
 
   }
   public uploadFileDeplome(id:number , myFile : FormData){
-    console.log(id);
+
     return this.http.post<any>('http://localhost:5000/upload/deplome',myFile,{params: {id:id}});
   }
 
