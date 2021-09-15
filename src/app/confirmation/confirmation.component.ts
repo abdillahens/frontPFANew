@@ -15,15 +15,21 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(this.id);
     this._auth.ConfirmAuth(this.id).subscribe(
       res=> {
 
+        console.log('good inscription from confirmer')
+        localStorage.removeItem('authorization');
         localStorage.setItem('authorization', res.accessToken);
         this._router.navigate(['/acceuil']);
         
       },
       
-      err=>{console.log(err)})
+      err=>{
+        console.log(err);
+        // this._router.navigate(['/acceuil']);
+      })
 
   }
   }
