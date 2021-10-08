@@ -21,6 +21,7 @@ export class AcceuilComponent implements OnInit {
   EmailExist: boolean =false;
   submitted: boolean | undefined;
   loginFailled: boolean = false;
+  continueForm: any;
 
   constructor(private _auth : AuthService,private _router : Router,private formBuilder: FormBuilder,private authService : SocialAuthService) { }
 
@@ -71,12 +72,12 @@ export class AcceuilComponent implements OnInit {
 
     // console.log(this.nom,this.prenom,this.sexe,this.date_naissance,this.email,this.tele,this.profession,this.password)
     this.submitted = true;
-    const {nom,prenom,sexe,date_naissance,email,tele,profession,niveauScloaire,password} = this.registerForm.value;
+    const {nom,prenom,sexe,date_naissance,email,tele,profession,niveauScolaire,password} = this.registerForm.value;
     if (this.registerForm.invalid) {
         return;
     }
 
-    this._auth.registreClient(nom,prenom,sexe,date_naissance,email,tele,profession,niveauScloaire,password).subscribe(
+    this._auth.registreClient(nom,prenom,sexe,date_naissance,email,tele,profession,niveauScolaire,password).subscribe(
 
       res =>{
         this.message = res.message;
@@ -97,17 +98,61 @@ export class AcceuilComponent implements OnInit {
     )
 
   }
+
+  public continueRegistre(){
+    this.submitted = true;
+    const {sexe,email,prenom,nom,date_naissance,tele,profession,niveauScolaire} = this.continueForm.value;
+    if (this.continueForm.invalid) {
+        return; 
+    }
+
+    let id = this.user.id;
+    this._auth.continueGoogle({id,email,prenom,nom,sexe,date_naissance,tele,profession,niveauScolaire}).subscribe(
+      res=>{
+        localStorage.removeItem('authorization');
+        localStorage.setItem('authorization', res.accessToken);
+        $('#elegantModalFormRegistreContinue').modal('hide');
+        this._router.navigate(['/home']);
+
+      },
+      err=>{}
+    )
+
+  }
   
   async signInGoogle(){
     
     await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res=>this.user=res);
      this._auth.loginUserGoogle(this.user.idToken).subscribe(
+       
        res=> {
-         localStorage.removeItem('authorization');
-         localStorage.setItem('authorization', res.accessToken);
+
+         //localStorage.removeItem('authorization');
+         //localStorage.setItem('authorization', res.accessToken);
          $('#elegantModalFormRegistre').modal('hide');
          $('#elegantModalForm').modal('hide');
-          this._router.navigate(['/home']);
+         this.user=res.user;
+         console.log(res.user.niveauScloaire)
+         if(!res.user.exist){
+          $('#elegantModalFormRegistreContinue').modal('show');
+          this.continueForm = this.formBuilder.group({
+            nom: [res.user.nom],
+            prenom: [res.user.prenom],
+            email: [res.user.email],
+            tele: ['', [Validators.required,Validators.pattern("^((\\([0-9][0-9][0-9]\\))|(\\([0-9][0-9]\\)))?\\-[0-9]{10}$")] ],
+            sexe : ['', [Validators.required]],
+            date_naissance : ['', [Validators.required]],
+            niveauScolaire : ['', [Validators.required]],
+            profession : ['', [Validators.required]] },{
+              // validator: this.MustMatch('password', 'confirmPassword')
+            });
+         }
+          else{
+            console.log("loign with ggoogle")
+            localStorage.removeItem('authorization');
+            localStorage.setItem('authorization', res.accessToken);
+            this._router.navigate(['/home']);
+          }
        },
        err=>{
          console.log(err.error);
@@ -117,6 +162,7 @@ export class AcceuilComponent implements OnInit {
 
 get f() { return this.registerForm.controls; }
 get f2() { return this.loginForm.controls; }
+get f3(){return this.continueForm.controls;}
 
 
 
@@ -135,6 +181,17 @@ get f2() { return this.loginForm.controls; }
       profession : ['', [Validators.required]] },{
         // validator: this.MustMatch('password', 'confirmPassword')
       });
+      this.continueForm = this.formBuilder.group({
+        nom: ['', Validators.required],
+        prenom: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        tele: ['', [Validators.required,Validators.pattern("^((\\([0-9][0-9][0-9]\\))|(\\([0-9][0-9]\\)))?\\-[0-9]{10}$")] ],
+        sexe : ['', [Validators.required]],
+        date_naissance : ['', [Validators.required]],
+        niveauScolaire : ['', [Validators.required]],
+        profession : ['', [Validators.required]] },{
+          
+        });
       this.loginForm = this.formBuilder.group({
 
         email: ['', [Validators.required]],

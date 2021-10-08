@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { DepressionComponent } from './depression/depression.component';
 import { ErrorInRoutingComponent } from './error-in-routing/error-in-routing.component';
+import { ExcelFileComponent } from './excel-file/excel-file.component';
 import { GestionEnquetesComponent } from './gestion-enquetes/gestion-enquetes.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -99,6 +100,12 @@ canActivate : [AuthClientGuardGuard],}
 { 
   path : 'admin/client-side',
   component : AdminClientSideComponent ,
+  canActivate : [AuthAdminGuardGuard ]
+}
+,
+{ 
+  path : 'admin/excelFile',
+  component : ExcelFileComponent,
   canActivate : [AuthAdminGuardGuard ]
 }
 ,
