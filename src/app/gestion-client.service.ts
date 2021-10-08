@@ -15,7 +15,9 @@ export class GestionClientService {
 
   constructor(private http : HttpClient,private _router : Router) { }
 
-
+  public uploadExcel(myFile : FormData){
+    return this.http.post<any>('http://localhost:5000/upload/excel/data',myFile);
+  }
 
   public getClients(){
     return this.http.get<any>(this._selectUrl);

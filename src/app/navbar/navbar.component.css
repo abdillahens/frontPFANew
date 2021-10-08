@@ -152,7 +152,7 @@ body {
   
   .navbar ul {
     margin: 0;
-    padding: 0;
+    padding: 0; 
     display: flex;
     list-style: none;
     align-items: center;
@@ -206,6 +206,9 @@ body {
   .navbar .getstarted:hover {
     color: #fff !important;
     background: #31a9e1;
+  }
+  .compte{
+    margin-left: 120% !important;
   }
   
   .navbar .dropdown ul {

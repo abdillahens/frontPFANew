@@ -28,6 +28,7 @@ import { AnexityComponent } from './anexity/anexity.component';
 import { DepressionComponent } from './depression/depression.component';
 import { StressComponent } from './stress/stress.component';
 import { GestionEnquetesComponent } from './gestion-enquetes/gestion-enquetes.component';
+import { ExcelFileComponent } from './excel-file/excel-file.component';
 
 
 
@@ -53,6 +54,7 @@ import { GestionEnquetesComponent } from './gestion-enquetes/gestion-enquetes.co
     DepressionComponent,
     StressComponent,
     GestionEnquetesComponent,
+    ExcelFileComponent,
    
   ],
 

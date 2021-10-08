@@ -1,30 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { GestionClientService } from '../gestion-client.service';
 declare var $ :any;
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-excel-file',
+  templateUrl: './excel-file.component.html',
+  styleUrls: ['./excel-file.component.css']
 })
-export class AdminComponent implements OnInit {
+export class ExcelFileComponent implements OnInit {
+
   public profile = "../assets/img/contact.png";
-  public user = {
-    date_naissance : '',
-  email: '',
-  id: 0,
-  nom: '',
-  numero_tele: '',
-  prenom: '',
-  profession: '',
-  adresse: '',
-  role: '',
-  picture: ''
-  };
+  public user = {date_naissance : '',email: '',id: 0,nom: '',numero_tele: '',prenom: '',profession: '',adresse: '',role: '',picture: ''};
   public static clients : Array<any> = [];
+  public excel: any;
   constructor(private _Client : GestionClientService,private _router : Router,private _auth :AuthService) { }
   private image: File = new File(["foo"], "foo.txt");
   public charged = true;
@@ -38,7 +28,28 @@ export class AdminComponent implements OnInit {
     this.charged = false;
     console.log(this.image);
   }
+
+  selectExcel(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) {
+      return;
+    }
+    this.excel = input.files[0];
+    this.charged = false;
+    console.log(this.excel);
+  }
   
+  public sendExcel(){
+    const formDataProfile = new FormData();
+    formDataProfile.append('file', this.excel);
+
+    this._Client.uploadExcel(formDataProfile).subscribe(
+      res=>{console.log(res.message)},
+      err=>{}
+    )
+
+  }
+
   public changePhoto(){
 
     console.log("click")
@@ -60,6 +71,7 @@ export class AdminComponent implements OnInit {
   public editPhoto(){
     $('#exampleModalCenter').modal('show');
   }
+  
   public addPhoto(){
     $('#exampleModalCenter').modal('hide');
     $('#addPhoto').modal('show');
@@ -67,19 +79,15 @@ export class AdminComponent implements OnInit {
   public getUser(){
     return this.user;
   }
-  
+
+
+
  
   ngOnInit(): void {
 
-   this._Client.getClients().subscribe(
-      res=> {
-        console.log(res);
-        AdminComponent.clients = res;
-      },
-      err=>{console.log(err)})
 
       this._auth.getInformation().subscribe(
-        res => {
+         res => {
           console.log(res);
           this.user = res;
         },
@@ -92,4 +100,3 @@ export class AdminComponent implements OnInit {
   }
 
 }
-

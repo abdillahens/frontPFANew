@@ -21,6 +21,11 @@ export class AuthService {
     return this.http.post<any>(this._loginUrlGoogle,{token : token});
   }
 
+  public continueGoogle(user:any){
+    console.log(user);
+    return this.http.post<any>('http://localhost:5000/googleContinue',user);
+  }
+
   public loginUser(email : String,password : String){
 
     return this.http.post<any>(this._loginUrl,{email,password});
@@ -43,6 +48,8 @@ export class AuthService {
   public uploadProfile(id : number , myFile : FormData){
     return this.http.post<any>('http://localhost:5000/upload/img/client',myFile,{params: {id:id}});
   }
+
+
 
   public uploadProfileSpecialiste(id : number , myFile : FormData){
     return this.http.post<any>('http://localhost:5000/upload/img/specialiste',myFile,{params: {id:id}});

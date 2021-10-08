@@ -58,7 +58,7 @@
                                 class="form-control validate validate" [ngClass]="{ 'is-invalid': submitted && f2.email.errors }" placeholder="Votre email">
                             <div *ngIf="submitted && f2.email.errors" class="invalid-feedback">
                                 <div *ngIf="f2.email.errors.required">Email est obligatoire</div>
-                                <div *ngIf="f2.email.errors.email">Email must be a valid email address</div>
+                                <div *ngIf="f2.email.errors.email">Email doit être valide</div>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                             </div>
                             <h6 *ngIf="loginFailled">
                                 <br>
-                                <div class="text-danger">Email ou Le mot de pass est incorrect</div>
+                                <div class="text-danger">Email ou le mot de pass est incorrect</div>
                             </h6>
                             <p class="font-small blue-text d-flex justify-content-end mt-2"> <a href="#"
                                     class="blue-text mr-1">
@@ -297,11 +297,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" formControlName="prenom" placeholder="Votre Prenom *"
+                                    <input type="text" formControlName="prenom" placeholder="Votre prénom *"
                                         class="form-control validate"
                                         [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" />
                                     <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
-                                        <div *ngIf="f.prenom.errors.required">Prenom est obligatoire</div>
+                                        <div *ngIf="f.prenom.errors.required">Prénom est obligatoire</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -309,7 +309,7 @@
                                         <select formControlName="sexe" class="form-control validate"
                                             [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }"
                                             class="custom-select validate">
-                                            <option value="" selected disabled>Votre Sexe *</option>
+                                            <option value="" selected disabled>Votre sexe *</option>
                                             <option value="M">M</option>
                                             <option value="F">F</option>
                                         </select>
@@ -329,12 +329,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" formControlName="email" placeholder="Votre Email *"
+                                    <input type="text" formControlName="email" placeholder="Votre email *"
                                         class="form-control validate"
                                         [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                         <div *ngIf="f.email.errors.required">Email est obligatoire</div>
-                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        <div *ngIf="f.email.errors.email">Email doit être valide</div>
                                     </div>
                                     <p *ngIf="EmailExist" class="text-danger pt-1 ps-2">Email déja exist !!</p>
                                 </div>
@@ -343,12 +343,12 @@
                                 <!-- (keyup)="changeTele()" -->
                                 <div class="form-group">
                                     <input type="text" [(ngModel)]="TELE" (focus)="changeTele()"
-                                        placeholder="Votre Numero De Tele *" formControlName="tele"
+                                        placeholder="Votre numèro de téléphone *" formControlName="tele"
                                         class="form-control validate"
                                         [ngClass]="{ 'is-invalid': submitted && f.tele.errors }" />
                                     <div *ngIf="submitted && f.tele.errors" class="invalid-feedback">
-                                        <div *ngIf="f.tele.errors.required">Numero de tele est obligatoire</div>
-                                        <div *ngIf="f.tele.errors.pattern">Invalid phone number.</div>
+                                        <div *ngIf="f.tele.errors.required">Numèro de téléphone est obligatoire</div>
+                                        <div *ngIf="f.tele.errors.pattern">Numèro de téléphone invalide.</div>
                                     </div>
                                 </div>
 
@@ -385,23 +385,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Votre Mot De Passe *" formControlName="password"
+                                    <input type="password" placeholder="Votre mot de passe *" formControlName="password"
                                         class="form-control validate"
                                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                         <div *ngIf="f.password.errors.required">Password est obligatoire</div>
-                                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters
+                                        <div *ngIf="f.password.errors.minlength">minumum 6 characters and le mot de pass
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirmer Votre Mot De Passe *"
+                                    <input type="password" placeholder="Confirmer votre mot de passe *"
                                         formControlName="passwordConfirm" class="form-control validate"
                                         [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }" />
                                     <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
                                         <div *ngIf="f.passwordConfirm.errors.required">Password est obligatoire</div>
-                                        <div *ngIf="f.passwordConfirm.errors.minlength">Password must be at least 6
-                                            characters</div>
+                                        <div *ngIf="f.passwordConfirm.errors.minlength">minumum 6 characters and le mot de pass</div>
                                     </div>
                                 </div>
                             </div>
@@ -439,6 +438,120 @@
         </div>
     </div>
     <!-- Modal -->
+
+    <div class="modal fade " id="elegantModalFormRegistreContinue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3 ms-5" id="myModalLabel">
+                    <strong>Continue Votre Inscription</strong>
+                </h3>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+                <!--Body-->
+                <form [formGroup]="continueForm" (ngSubmit)="registreSubmit()">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" formControlName="nom" class="form-control"
+                                    placeholder="Votre Nom *" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="prenom" placeholder="Votre Prenom *"
+                                    class="form-control"  readonly/>
+                            </div>
+                            <div class="form-group">
+                                <div class="maxl">
+                                    <select formControlName="sexe" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f3.sexe.errors }"
+                                        class="custom-select">
+                                        <option value="" selected disabled>Votre Sexe *</option>
+                                        <option value="M">M</option>
+                                        <option value="F">F</option>
+                                    </select>
+                                    <div *ngIf="submitted && f3.sexe.errors" class="invalid-feedback">
+                                        <div *ngIf="f3.sexe.errors.required">Sexe est obligatoire</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input placeholder="Date de naissance *" type="text" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" formControlName="date_naissance"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f3.date_naissance.errors }" />
+                                <div *ngIf="submitted && f3.date_naissance.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.date_naissance.errors.required">Date de naissance est obligatoire
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" formControlName="email" placeholder="Votre Email *"
+                                    class="form-control"  readonly />
+                            </div>
+                            <!-- (keyup)="changeTele()" -->
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="TELE" (focus)="changeTele()"
+                                    placeholder="Votre Numero De Tele *" formControlName="tele"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f3.tele.errors }" />
+                                <div *ngIf="submitted && f3.tele.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.tele.errors.required">Numero de tele est obligatoire</div>
+                                    <div *ngIf="f3.tele.errors.pattern">Invalid phone number.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <select formControlName="profession" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f3.profession.errors }"
+                                    class="custom-select">
+                                    <option value="" selected disabled>Votre profession *</option>
+                                    <option value="Etudiant">Etudiant</option>
+                                    <option value="Professeur">Professeur</option>
+                                    <option value="Doctorant">Doctorant</option>
+                                    <option value="autre">autre</option>
+                                </select>
+                                <div *ngIf="submitted && f3.profession.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.profession.errors.required">profession est obligatoire</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select formControlName="niveauScolaire" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f3.niveauScolaire.errors }"
+                                    class="custom-select">
+                                    <option value="" selected disabled>Votre niveau scolaire *</option>
+                                    <option value="1 ère année preparatoire">1 ère année preparatoire</option>
+                                    <option value="2 ème année preparatoire">2 ème année preparatoire</option>
+                                    <option value="1 ère année cycle d'ingenieur">1 ère année cycle d'ingenieur
+                                    </option>
+                                    <option value="2 ème année cycle d'ingénieur">2 ème année cycle d'ingénieur
+                                    </option>
+                                    <option value="3 ème année cycle d'ingénieur">3 ème année cycle d'ingénieur
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f3.profession.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.profession.errors.required">profession est obligatoire</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center mb-3 mt-3 me-auto">
+                    <button type="button" (click)="continueRegistre()"
+                        class="btn blue-gradient btn-block btn-rounded z-depth-1a inscrire">Continue à  S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>    
 
     <!-- Modal-for registre success -->
     <div class="modal fade" id="elegantModalFormSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
